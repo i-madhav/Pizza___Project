@@ -57,14 +57,14 @@ body {
   display: block;
   content: '';
   height: 3px;
-  width: 12rem;
+  width: 10rem;
   background-color: #edc84b;
   position: absolute;
-  top: calc(50% - 1px);
+  top: calc(50% +2px);
 }
 
 .header h1::before {
-  left: 0;
+  left: 0x;
 }
 
 .header h1::after {
@@ -166,6 +166,7 @@ body {
   color: inherit;
   font-family: inherit;
   border: none;
+  border-radius: 10px;
   font-size: 1.4rem;
   font-weight: 500;
   background-color: #edc84b;

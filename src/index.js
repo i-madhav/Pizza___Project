@@ -1,6 +1,7 @@
 
 import React, { StrictMode } from "react";
 import  ReactDOM  from "react-dom/client";
+import './index.css'
 
 const pizzaData = [
     {
@@ -50,7 +51,7 @@ const pizzaData = [
 
 function App(){
     return(
-        <div>
+        <div className="container">
         <Header/>
         <Menu/>
         <Footer/>
@@ -58,39 +59,120 @@ function App(){
     )
 }
 
-const Header = ()=>{
+const Header = ()=>{ 
+    const stylez = {}
     return(
-        <h1>Fast React Pizza.Co</h1>
+        <header className="header">
+             <h1 style={stylez} >Fast React Pizza.Co</h1>
+        </header>
+       
     )
 }
 
 const Menu = ()=>{
+
+    const pizzas = pizzaData;
+    const numPizas = pizzas.length
     return(
-        <div>
+        <main className="menu">
             <h2>Our Menu</h2>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
-        </div>
+    
+          {
+            numPizas > 0 ? (
+                <ul className="pizzas">
+                    {pizzas.map((pizza)=>{
+                       return <Pizza  pizzaObj ={pizza} key={pizza.name}/>
+                    })}
+                </ul>
+            ):<p>We're still working on our website . Please come later</p>
+          }
+            {/* <Pizza 
+            name="Pizza Spinaci" 
+            ingredients="Tomato, mozarella, spinach, and ricotta cheese" 
+            photoName="pizzas/spinaci.jpg" 
+            price={10}
+            />
+
+            <Pizza 
+             name= "Pizza Funghi"
+             ingredients= "Tomato, mozarella, mushrooms, and onion"
+             price = {12}
+             photoName= "pizzas/funghi.jpg"
+             />
+
+            <Pizza 
+             name= "Pizza Salamino"
+             ingredients= "Tomato, mozarella, and pepperoni"
+             price = {15}
+             photoName= "pizzas/salamino.jpg"
+             />
+
+            <Pizza 
+             name= "Pizza Prosciutto"
+             ingredients= "Tomato, mozarella, ham, aragula, and burrata cheese"
+             price = {18}
+             photoName= "pizzas/prosciutto.jpg"
+             />
+
+            <Pizza 
+             name= "Focaccia"
+             ingredients= "Bread with italian olive oil and rosemary"
+             price = {6}
+             photoName= "pizzas/focaccia.jpg"
+             />
+
+            <Pizza 
+             name= "Pizza Margherita"
+             ingredients= "Tomato and mozarella"
+             price = {10}
+             photoName= "pizzas/margherita.jpg"
+             /> */}
+        </main>
+    )
+}
+
+function Pizza({pizzaObj}){
+console.log(pizzaObj)
+    return (
+        <li className="pizza">
+            <img src={pizzaObj.photoName} alt={pizzaObj.name}/>
+            <div>
+            <h1>{pizzaObj.name}</h1>
+            <p>{pizzaObj.ingredients}</p>
+            <span>{pizzaObj.price}</span>
+            </div>
+        </li>
     )
 }
 
 const Footer = ()=>{
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    const isOpen = hour>=openHour && hour<closeHour;
+    console.log(isOpen)
+    // if(hour>=openHour && hour<closeHour){
+    //     alert("We're Opened")
+    // }else{
+    //     alert("We're Closed Dumbo")
+    // }
     return(
-        <footer>{new Date().toLocaleTimeString()} We are currently closed !</footer>
+        <footer className="footer ">
+            {isOpen ? ( <Order closeHour = {closeHour}/>
+            ):null} 
+            </footer>
     )
 }
 
-function Pizza(){
-    return (
-        <div>
-            <img src="pizzas/spinaci.jpg" alt="Pizza_Spinachi"/>
-            <h1>Pizza Spinaci</h1>
-            <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-        </div>
+const Order = ({closeHour})=>{
+    return(
+        <div className="order">
+        <p>
+        We're Open until {closeHour}:00 . Come Visit Us Or Order Online !
+        </p>
+
+        <button className="btn">Order Now </button>
+    </div>
     )
 }
 
