@@ -159,7 +159,7 @@ const Footer = ()=>{
     return(
         <footer className="footer ">
             {isOpen ? ( <Order closeHour = {closeHour}/>
-            ):null} 
+            ):<p>We,re currently closed. Please come back later</p>} 
             </footer>
     )
 }
